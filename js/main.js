@@ -106,6 +106,21 @@ function contactClicked(contact){
     2. Get Gender Of Contact And Set Image depend On It
     3. Get Number Of Contact And Set It In Phone Icon
     */
+    var name =contact.name;
+    var phone =contact.phone;
+    document.getElementById("NameOfContact_id").textContent=name;
+
+    if(contact.gender === 1){
+        gender = "girl";
+        document.getElementById('image_id').src='./images/girl.jpg'
+    }else
+    {
+        document.getElementById('image_id').src='./images/boy.jpg'
+    }
+
+
+
+
 }
 
 
@@ -116,6 +131,9 @@ function deleteContact(){
     3. Convert Array To Json And Save It In LocalStorage
     4. Remove GUI Div That Represent Contact
     */
+
+
+
 }
 
 
