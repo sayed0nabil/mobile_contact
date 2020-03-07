@@ -1,5 +1,6 @@
 
 let contacts = [];
+let activeContact = null;
 // on Load Page
 /*
 
@@ -14,12 +15,17 @@ $(document).ready(function(){
         contacts = JSON.parse(json);
     }
     for(const contact of contacts)
-        addGUIContact(contact)
+        addGUIContact(contact);
+    json = localStorage.getItem("activecontact");
+    if(json != null){
+        activeContact = JSON.parse(json);
+        viewContactProfile(activeContact);
+    }
+        
 })
 
 // Constructor Function Of Contact Object
 // gender = 0 --> Male || gender = 1 --> Female
-let id = 0;
 function Contact(name, phone, email, gender){
     this.id = new Date().getTime();
     this.name = name;
@@ -40,12 +46,14 @@ function addGUIContact(contact){
     let li = $("<li>", {id: `li${contact.id}`, "class":"ui-li-has-alt ui-li-has-thumb ui-last-child"});
     let firstLink = $("<a>", {"href":"#profilepage", "class":"ui-btn"});
     firstLink.on('click', function(event){
-        contactClicked(contact);
+        activeContact = contact;
+        localStorage.setItem("activecontact", JSON.stringify(contact));
+        viewContactProfile(contact);
     });
     let img = $("<img>", {"src": `./images/${gender}.jpg`, "width":"100", "height":"100", "alt": "Male Person"});
     firstLink.append(img)
-    firstLink.append(contact.name);
-    let secondLink = $("<a>", {"href":`tel:+${contact.phone}`, "class":"ui-btn ui-btn-icon-notext ui-icon-phone ui-btn-d"});
+    firstLink.append(contact.name + "<br><br> <span style='color: #e6c46d'>" + contact.phone + "</span>");
+    let secondLink = $("<a>", {"href":`tel:${contact.phone}`, "class":"ui-btn ui-btn-icon-notext ui-icon-phone ui-btn-d"});
     li.append(firstLink);
     li.append(secondLink);
     $("#listview_id").append(li);
@@ -72,7 +80,7 @@ function saveButtonClicked(event){
     const phone = $("#number-pattern").val();
     const email = $("#email_id").val().trim();
     const gender = $("#slider-flip-m")[0].selectedIndex;
-    if(!isEmpty(name) && !isEmpty(phone)){
+    if(!isEmpty(name) && !isEmpty(phone) && ( isEmpty(email) || validateEmail(email) )){
         $("#name_error_id").css("visibility", "hidden");
         $("#phone_error_id").css("visibility", "hidden");
         let newContact = new Contact(name, phone, email, gender);
@@ -94,12 +102,17 @@ function saveButtonClicked(event){
         }
         else
             $("#phone_error_id").css("visibility", "hidden");    
+        if(!isEmpty(email) && !validateEmail(email)){
+            $("#email_error_id").css("visibility", "visible");
+        }
+        else
+            $("#email_error_id").css("visibility", "hidden");   
     }
 }
 
 
 
-function contactClicked(contact){
+function viewContactProfile(contact){
     console.log(contact);
     /*
     1. Get Name Of Contact And Set It As Header In Profile Page
@@ -118,28 +131,48 @@ function contactClicked(contact){
         document.getElementById('image_id').src='./images/boy.jpg'
     }
 
-
-
-
+    $("#phone_id").attr("href", `tel: ${contact.phone}`) ;
+    $("#phone_id").addClass("ui-btn ui-btn-icon-notext ui-icon-phone ui-btn-d");
 }
 
+function deleteButtonClicked(event){
+    if(activeContact == null){
+        event.preventDefault();
+        alert("NO CONTACT SELECTED");
+    }else{
 
-function deleteContact(){
+    }
+}
+
+Array.prototype.removeIf = function(callback){
+    for(let i=0; i<this.length; i++){
+        if(callback(this[i]))
+            this.splice(i, 1);
+    }
+}
+function confirmDeletion(){
+    deleteContact(activeContact)
+}
+
+function deleteContact(contact){
     /*
     1. Get Id Of Contact 
     2. Delete Contact From Array
     3. Convert Array To Json And Save It In LocalStorage
     4. Remove GUI Div That Represent Contact
     */
-
-
-
+    console.log(contacts);
+    console.log(contact.id);
+    contacts.removeIf(contactItem => contactItem.id === contact.id );
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+    $(`#li${contact.id}`).remove();
 }
+
 
 
 // If We Have Time We Can Make Some Utilization
 /*
-    1. Make Footer In Bottom Section All Time
+    1. Make Footer In Bottom Section All Time   << Done >>
     2. Make Update Profile Page
 
 */

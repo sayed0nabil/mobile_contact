@@ -7,3 +7,15 @@
     font-family: serif;
     visibility: hidden;
 }
+
+footer{
+    position: absolute !important;
+    bottom: 0px !important;
+    width: 100%;
+}
+
+ul li a{
+    font-family: 'Roboto Slab', serif !important;
+    letter-spacing: 2px !important;
+    color: red;
+}

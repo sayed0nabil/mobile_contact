@@ -7,6 +7,7 @@
     <title>Call List Application</title>
     <link rel="shortcut icon" type="image/png" href="./images/iphone.png"/>
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <link rel="stylesheet" href="./css/style.css">
@@ -20,7 +21,7 @@
     <section data-role="page" id="mainpage">
         <header data-role="header">
             <h1> 
-                <a href="#newcontactpage" data-role="button" data-transition="flip" data-icon="plus" onclick="contactClicked()">Add</a>
+                <a href="#newcontactpage" data-role="button" data-transition="flip" data-icon="plus">Add</a>
                 <span>Contact List</span>
             </h1>
         </header>
@@ -32,7 +33,7 @@
             </ul>
         </article>
         <footer data-role="footer">
-                <h1> Page One Footer</h1>
+                <h1> &copy; copyright For Sayed &amp; Radwa </h1>
         </footer>
     </section>
 
@@ -61,6 +62,7 @@
             <div data-role="fieldcontain">
                 <label for="textinput">Email</label>
                 <input type="text" name="textinput" id="email_id" placeholder="Enter Email" value="">
+                <p class="validation_error" id="email_error_id">Not a valid email</p>
             </div>
             <div>
                 <label for="slider-flip-m">Gender</label>
@@ -77,7 +79,7 @@
             </div>
         </article>
         <footer data-role="footer">
-                <h1> Page One Footer</h1>
+                <h1> &copy; copyright For Sayed &amp; Radwa </h1>
         </footer>
     </section>
 
@@ -99,14 +101,14 @@
                 </div>
 
                 <div>
-                    <a href="#deletedialog" data-role="button" data-icon="delete" data-inline="true"></a>
+                    <a onclick="deleteButtonClicked(event)" href="#deletedialog" data-role="button" data-icon="delete" data-inline="true"></a>
                     <a data-role="button" data-icon="edit" data-inline="true"></a>
-                    <a data-role="button" data-icon="phone" data-inline="true"></a>
+                    <a data-role="button" data-icon="phone" data-inline="true" id="phone_id"></a>
                 </div>
             </div>
         </article>
         <footer data-role="footer">
-            <h1> Page One Footer</h1>
+            <h1> &copy; copyright For Sayed &amp; Radwa </h1>
         </footer>
     </section>
 
@@ -119,7 +121,7 @@
         </header>
 
         <article data-role="content">
-            <a href="#mainpage" data-role="button" data-inline="true" data-transition="flip">Yes</a>
+            <a onclick="confirmDeletion()" href="#mainpage" data-role="button" data-inline="true" data-transition="flip">Yes</a>
             <a href="#profilepage" data-role="button" data-inline="true" data-transition="flip">No</a>
         </article>
 
