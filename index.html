@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="js/Validation.js"></script>
 </head>
 <body>
     <section data-role="page" id="mainpage">
@@ -21,13 +23,6 @@
                 <input id="filterBasic-input" data-type="search">
             </form>
             <ul id="listview_id" data-role="listview" data-filter="true" data-input="#filterBasic-input" data-split-icon="phone" data-split-theme="d" data-inset="true">
-                <li>
-                    <a href="#profilepage">
-                        <img src="./images/boy.jpg" width="100" height="100" alt="Male person"/>
-                        Sayed Nabil
-                    </a>
-                    <a href="tel:+1800229933">Call us free!</a>
-                </li>
             </ul>
         </article>
         <footer data-role="footer">
@@ -49,14 +44,16 @@
             <div data-role="fieldcontain">
                 <label for="textinput">Name</label>
                 <input type="text" name="textinput" id="name_id" placeholder="Enter Contact Name" value="">
+                <p class="validation_error" id="name_error_id">Name field is required</p>
             </div>
             <div data-role="fieldcontain">
                 <label for="textinput">Phone</label>
                 <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="">
+                <p class="validation_error" id="phone_error_id">Phone field is requried</p>
             </div>
             <div data-role="fieldcontain">
                 <label for="textinput">Email</label>
-                <input type="text" name="textinput" id="textinput" placeholder="Enter Email" value="">
+                <input type="text" name="textinput" id="email_id" placeholder="Enter Email" value="">
             </div>
             <div>
                 <label for="slider-flip-m">Gender</label>
@@ -68,10 +65,9 @@
             <div>
                 <p>
                     <a href="#mainpage" data-role="button" data-inline="true" data-icon="check" onclick="saveButtonClicked(event)">Save</a>
-                    <a href="#" data-role="button" data-inline="true" data-icon="delete">Cancel</a>
+                    <a href="#mainpage" data-role="button" data-inline="true" data-icon="delete">Cancel</a>
                 </p>
             </div>
-            <aside>Hello World</aside>
         </article>
         <footer data-role="footer">
                 <h1> Page One Footer</h1>

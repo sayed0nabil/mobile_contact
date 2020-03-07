@@ -1,0 +1,9 @@
+
+
+.validation_error{
+    font-size: 14px;
+    margin: auto;
+    color: #960f0f;
+    font-family: serif;
+    visibility: hidden;
+}
