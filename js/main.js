@@ -83,6 +83,7 @@ function saveButtonClicked(event){
     if(!isEmpty(name) && !isEmpty(phone) && ( isEmpty(email) || validateEmail(email) )){
         $("#name_error_id").css("visibility", "hidden");
         $("#phone_error_id").css("visibility", "hidden");
+        $("#email_error_id").css("visibility", "hidden");
         let newContact = new Contact(name, phone, email, gender);
         addContactToArrayAndLocalStorage(newContact);
         addGUIContact(newContact);
@@ -130,7 +131,12 @@ function viewContactProfile(contact){
     {
         document.getElementById('image_id').src='./images/boy.jpg'
     }
-
+    console.log("Email" + contact.email);
+    $("#profile_name_id").text(`Name: ${contact.name}`);
+    $("#profile_phone_id").text(`Phone: ${contact.phone}`);
+    if(!isEmpty(contact.email))
+        $("#profile_email_id").text(`Email: ${contact.email}`);
+    else $("#profile_email_id").text("");
     $("#phone_id").attr("href", `tel: ${contact.phone}`) ;
     $("#phone_id").addClass("ui-btn ui-btn-icon-notext ui-icon-phone ui-btn-d");
 }
