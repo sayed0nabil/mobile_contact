@@ -105,7 +105,9 @@ function contactClicked(contact){
     1. Get Name Of Contact And Set It As Header In Profile Page
     2. Get Gender Of Contact And Set Image depend On It
     3. Get Number Of Contact And Set It In Phone Icon
+    4. Get Image of Contact And Set it on Image
     */
+   console.log(contact.name);
 }
 
 
